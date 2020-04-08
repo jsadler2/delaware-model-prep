@@ -8,6 +8,7 @@ packages:
   - igraph
   - purrr
   - scipiper
+  - geojsonio
 
 sources:
   - 1_network/src/geo_fabric_functions.R
@@ -44,6 +45,14 @@ targets:
 
   1_network/out/network.rds:
     command: gd_get('1_network/out/network.rds.ind')
+
+  1_network/out/network.json.ind:
+    command: save_network_as_geojson(
+      out_ind = target_name,
+      network_ind = I('1_network/out/network.rds.ind'))
+
+  1_network/out/network.json:
+    command: gd_get('1_network/out/network.json.ind')
 
   1_network/out/boundary.rds.ind:
     command: create_boundary(
